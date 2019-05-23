@@ -1,6 +1,5 @@
 function createCalendar(id, year, month) {
   const element = document.getElementById(id);
-  // element.insertAdjacentHTML('afterBegin', getCalendarTable(year, month));
   element.appendChild(createCalendarTable(year, month));
 }
 
