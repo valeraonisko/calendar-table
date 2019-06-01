@@ -27,7 +27,7 @@ function createCalendarTable(year, month) {
   table.appendChild(tbody);
   let row = tbody.insertRow();
 
-  let day = new Date(year, month-1,);
+  const day = new Date(year, month-1,);
   let dayOfWeek = day.getDay() - 1;
   if (dayOfWeek < 0) dayOfWeek = 6;
   addEmptyCells(row, dayOfWeek);
@@ -35,17 +35,22 @@ function createCalendarTable(year, month) {
   while (day.getMonth() + 1 === month ) {
     const bodyCell = document.createElement('td');
     bodyCell.textContent = day.getDate();
+    if (row === undefined) {
+      row = tbody.insertRow();
+    }
     row.appendChild(bodyCell);
 
     day.setDate(day.getDate() + 1);
     dayOfWeek++;
     if (dayOfWeek >= 7) {
       dayOfWeek = 0;
-      row = tbody.insertRow();
+      row = undefined;
     }
   }
-  addEmptyCells(row, 7 - dayOfWeek);
+  if (row !== undefined) {
+    addEmptyCells(row, 7 - dayOfWeek);
+  }
   return table;
 }
 
-createCalendar("calendar", 2019, 5)
+createCalendar('calendar', 2019, 6)
